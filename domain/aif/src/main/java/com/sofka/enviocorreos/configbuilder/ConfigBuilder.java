@@ -10,6 +10,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class ConfigBuilder {
 
-    private final EventsGateway eventsGateway;
     private final ConfigParameters configParameters;
 }

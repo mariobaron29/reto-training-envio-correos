@@ -45,12 +45,9 @@ public class ControllerConfig {
     private String tls;
 
     @Bean
-    public EmailController jobController(
-            EventsGateway eventsGateway
-    ) {
+    public EmailController emailController() {
         return new EmailController(
                 ConfigBuilder.builder()
-                        .eventsGateway(eventsGateway)
                         .configParameters(ConfigParameters.builder()
                                     .componentName(componentName)
                                     .serviceName(serviceName)

@@ -18,9 +18,9 @@ public class EventsSubscriptionsConfig {
 
     private final EventMapper eventMapper;
     private final EmailController controller;
-    private final String ROUTING_KEY_CREATED = "tareas.job.created";
-    private final String ROUTING_KEY_SCHEDULED = "tareas.job.scheduled";
-    private final String ROUTING_KEY_EXECUTED = "tareas.job.executed";
+    private static final String ROUTING_KEY_CREATED = "tareas.job.created";
+    private static final String ROUTING_KEY_SCHEDULED = "tareas.job.scheduled";
+    private static final String ROUTING_KEY_EXECUTED = "tareas.job.executed";
 
     @Bean
     public HandlerRegistry eventSubscriptions() {

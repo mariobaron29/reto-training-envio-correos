@@ -39,10 +39,10 @@ public class EmailController implements JobFactory, HeaderFactory {
     private SendGridAPI sendGridAPI;
 
     public Mono<Void> processJobEvent(JobEvent event) {
-        System.out.println(String.format("Processing event: \n id: %s \n Event name: %s \n Job Id: %s",event.getEventId(), event.getEventName(), event.getJobId()));
+        System.out.println(String.format("Processing event: %n id: %s %n Event name: %s %n Job Id: %s",event.getEventId(), event.getEventName(), event.getJobId()));
 
         return prepareEmailContent(event)
-                .flatMap(jobEvent -> sendEmail(jobEvent)) ;
+                .flatMap(this::sendEmail) ;
     }
 
     private Mono<JobEvent> prepareEmailContent(JobEvent event){
@@ -53,11 +53,11 @@ public class EmailController implements JobFactory, HeaderFactory {
         emailSubjects.put(JobScheduledEvent.EVENT_NAME, String.format("Job %s scheduled", event.getJobId()));
         emailSubjects.put(JobExecutedEvent.EVENT_NAME, String.format("Job %s executed", event.getJobId()));
 
-        emailContents.put(JobCreatedEvent.EVENT_NAME, String.format("A job with the following details has been created: \n Event Id: %s \n Job Id: %s \n Cron expression: %s \n Time zone: %s \n ",
+        emailContents.put(JobCreatedEvent.EVENT_NAME, String.format("A job with the following details has been created: %n Event Id: %s %n Job Id: %s %n Cron expression: %s %n Time zone: %s %n ",
                                                             event.getEventId() ,event.getJobId(), event.getCronRegExp(), event.getTimeZone()));
-        emailContents.put(JobScheduledEvent.EVENT_NAME, String.format("A job with the following details has been scheduled: \n Event Id: %s \n Job Id: %s \n Cron expression: %s \n Time zone: %s \n ",
+        emailContents.put(JobScheduledEvent.EVENT_NAME, String.format("A job with the following details has been scheduled: %n Event Id: %s %n Job Id: %s %n Cron expression: %s %n Time zone: %s %n ",
                                                             event.getEventId() ,event.getJobId(), event.getCronRegExp(), event.getTimeZone()));
-        emailContents.put(JobExecutedEvent.EVENT_NAME, String.format("A job with the following details has been executed: \n Event Id: %s \n Job Id: %s \n Cron expression: %s \n Time zone: %s \n ",
+        emailContents.put(JobExecutedEvent.EVENT_NAME, String.format("A job with the following details has been executed: %n Event Id: %s %n Job Id: %s %n Cron expression: %s %n Time zone: %s %n ",
                                                             event.getEventId() ,event.getJobId(), event.getCronRegExp(), event.getTimeZone()));
 
         emailSubject = emailSubjects.get(event.getEventName());
