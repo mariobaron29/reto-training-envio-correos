@@ -1,0 +1,8 @@
+dependencies {
+    compile project(':domain-aif')
+
+    // https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java
+    implementation group: 'com.sendgrid', name: 'sendgrid-java', version: '4.4.8'
+
+
+}
