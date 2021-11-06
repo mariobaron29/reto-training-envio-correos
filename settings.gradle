@@ -1,4 +1,4 @@
-rootProject.name = 'reto-training-ejecucion-tareas'
+rootProject.name = 'reto-training-envio-correos'
 
 FileTree buildFiles = fileTree(rootDir) {
     List excludes = gradle.startParameter.projectProperties.get("excludeProjects")?.split(",")

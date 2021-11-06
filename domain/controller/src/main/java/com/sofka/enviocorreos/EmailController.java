@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -39,7 +40,7 @@ public class EmailController implements JobFactory, HeaderFactory {
     private SendGridAPI sendGridAPI;
 
     public Mono<Void> processJobEvent(JobEvent event) {
-        System.out.println(String.format("Processing event: %n id: %s %n Event name: %s %n Job Id: %s",event.getEventId(), event.getEventName(), event.getJobId()));
+        log.log(Level.INFO, String.format("Processing event: %n id: %s %n Event name: %s %n Job Id: %s",event.getEventId(), event.getEventName(), event.getJobId()));
 
         return prepareEmailContent(event)
                 .flatMap(this::sendEmail) ;
@@ -67,7 +68,7 @@ public class EmailController implements JobFactory, HeaderFactory {
     }
 
     private Mono<Void> sendEmail(JobEvent event){
-        Email from = new Email("mariobaron@gmail.com", "Cron JOB notifier");
+        Email from = new Email("baron_mario@hotmail.com", "Cron JOB notifier");
         String subject = emailSubject;
         Email to = new Email(event.getEmail());
         Content content = new Content("text/plain", emailMessage);
